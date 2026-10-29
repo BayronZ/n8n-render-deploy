@@ -10,7 +10,7 @@ services:
       - key: N8N_PORT
         value: "5678"
       - key: WEBHOOK_URL
-        value: https://n8n-app.onrender.com/n8n_deploy
+        value: https://n8n-app-7jyf.onrender.com
       - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
         value: "true"
       - key: DB_TYPE
