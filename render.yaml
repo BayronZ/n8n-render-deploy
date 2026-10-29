@@ -2,19 +2,15 @@ services:
   - type: web
     name: n8n-app
     env: docker
-    region: oregon # Puedes cambiar la región (ej: ohio, frankfurt)
-    plan: starter # Se recomienda starter o superior para evitar que se duerma
-    disk:
-      name: n8n-data
-      mountPath: /home/node/.n8n
-      sizeGB: 1
+    plan: free
+    region: oregon
     envVars:
       - key: PORT
         value: "5678"
       - key: N8N_PORT
         value: "5678"
       - key: WEBHOOK_URL
-        value: https://tu-app.onrender.com/ # Reemplaza con tu URL definitiva de Render
+        value: https://n8n-app.onrender.com/ # Cambia n8n-app por el subdominio que elijas
       - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
         value: "true"
       - key: DB_TYPE
@@ -44,5 +40,5 @@ databases:
   - name: n8n-db
     databaseName: n8n
     user: n8n_user
-    plan: free # Puedes usar el plan gratuito para la base de datos de pruebas
+    plan: free
     region: oregon
