@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: n8n-app
+    env: docker
+    region: oregon # Puedes cambiar la región (ej: ohio, frankfurt)
+    plan: starter # Se recomienda starter o superior para evitar que se duerma
+    disk:
+      name: n8n-data
+      mountPath: /home/node/.n8n
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: "5678"
+      - key: N8N_PORT
+        value: "5678"
+      - key: WEBHOOK_URL
+        value: https://tu-app.onrender.com/ # Reemplaza con tu URL definitiva de Render
+      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+        value: "true"
+      - key: DB_TYPE
+        value: postgresdb
+      - key: DB_POSTGRESDB_HOST
+        fromDatabase:
+          name: n8n-db
+          property: host
+      - key: DB_POSTGRESDB_PORT
+        fromDatabase:
+          name: n8n-db
+          property: port
+      - key: DB_POSTGRESDB_DATABASE
+        fromDatabase:
+          name: n8n-db
+          property: database
+      - key: DB_POSTGRESDB_USER
+        fromDatabase:
+          name: n8n-db
+          property: user
+      - key: DB_POSTGRESDB_PASSWORD
+        fromDatabase:
+          name: n8n-db
+          property: password
+
+databases:
+  - name: n8n-db
+    databaseName: n8n
+    user: n8n_user
+    plan: free # Puedes usar el plan gratuito para la base de datos de pruebas
+    region: oregon
